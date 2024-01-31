@@ -1,12 +1,12 @@
-
 package main
 
 import (
 	"database/sql"
-	"fmt"
+	"flag"
 	"html/template"
 	"log"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/alexedwards/scs/v2"
@@ -29,20 +29,19 @@ func init() {
 	session.Lifetime = 6 * time.Hour
 }
 
-func sayHi(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hi")
-	fmt.Println(r.URL)
-}
 func main() {
+	host := flag.String("host", "", "address to host the site")
+	port := flag.Int("port", 8080, "port to host the site")
+	flag.Parse()
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", sayHi)
+	mux.HandleFunc("/", signin)
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 	mux.HandleFunc("/signin", signin)
 	mux.HandleFunc("/signup", signup)
 	mux.HandleFunc("/home", home)
 	mux.HandleFunc("/edit", edit)
 	mux.HandleFunc("/request", request)
-	err := http.ListenAndServe(":8080", session.LoadAndSave(mux))
+	err := http.ListenAndServe(*host+":"+strconv.Itoa(*port), session.LoadAndSave(mux))
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
