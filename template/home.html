@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+  <link rel="stylesheet" href="/static/home.css">
+  <link rel="stylesheet" href="/static/nav.css">
+  <link rel="icon" href="/static/logo.png" type="image/x-icon">
+</head>
+
+<body>
+  <div class="navi">
+    <nav>
+      <div>
+        <a href="/home">Home</a>
+      </div>
+      <div>
+        <a href="/edit">Edit</a>
+      </div>
+      <div>
+        <a href="/request">Friends</a>
+      </div>
+    </nav>
+  </div>
+
+  <p>
+    <B>HI, <br>{{ .Username }}</B>
+  </p>
+  <form action="/home" method="post">
+    <div class="cent">
+      <select class="day" name="day">
+        <option value="MON" {{if eq .Day "MON" }} selected{{ end }}>Monday</option>
+        <option value="TUE" {{if eq .Day "TUE" }} selected{{ end }}>Tuesday</option>
+        <option value="WED" {{if eq .Day "WED" }} selected{{ end }}>Wednesday</option>
+        <option value="THU" {{if eq .Day "THU" }} selected{{ end }}>Thursday</option>
+        <option value="FRI" {{if eq .Day "FRI" }} selected{{ end }}>Friday</option>
+      </select>
+
+      <input class="button" type="submit" value="Enter">
+
+    </div>
+  </form>
+  <br>
+  <div class="disp">
+    <table border="1">
+      <tr>
+        <th colspan="2">Time</th>
+        {{ range $schd := .Schedules}}
+        <th>{{ $schd.Name }}</th>
+        {{ end }}
+      </tr>
+      <tr>
+        <td>08:00-8:50</td>
+        <td>08:00-8:50</td>
+        {{ range $schd := .Schedules}}
+        <td>{{ $x := index $schd.Data 0 }}{{ $x.Name }}&nbsp;{{ $x.Code }}<br>{{ $x.Venue }}</td>
+        {{ end }}
+      </tr>
+      <tr>
+        <td>08:55-9:45</td>
+        <td>08:50-9:40</td>
+        {{ range $schd := .Schedules}}
+        <td>{{ $x := index $schd.Data 1 }}{{ $x.Name }}&nbsp;{{ $x.Code }}<br>{{ $x.Venue }}</td>
+        {{ end }}
+      </tr>
+      <tr>
+        <td>09:50-10:40</td>
+        <td>09:50-8:40</td>
+        {{ range $schd := .Schedules}}
+        <td>{{ $x := index $schd.Data 2 }}{{ $x.Name }}&nbsp;{{ $x.Code }}<br>{{ $x.Venue }}</td>
+        {{ end }}
+      </tr>
+      <tr>
+        <td>10:45-11:35</td>
+        <td>10:40-11:30</td>
+        {{ range $schd := .Schedules}}
+        <td>{{ $x := index $schd.Data 3 }}{{ $x.Name }}&nbsp;{{ $x.Code }}<br>{{ $x.Venue }}</td>
+        {{ end }}
+      </tr>
+      <tr>
+        <td>11:40-12:30</td>
+        <td>11:40-12:30</td>
+        {{ range $schd := .Schedules}}
+        <td>{{ $x := index $schd.Data 4 }}{{ $x.Name }}&nbsp;{{ $x.Code }}<br>{{ $x.Venue }}</td>
+        {{ end }}
+      </tr>
+      <tr>
+        <td>12:35-01:25</td>
+        <td>12:30-01:20</td>
+        {{ range $schd := .Schedules}}
+        <td>{{ $x := index $schd.Data 5 }}{{ $x.Name }}&nbsp;{{ $x.Code }}<br>{{ $x.Venue }}</td>
+        {{ end }}
+      </tr>
+      <tr>
+        <td>02:00-2:50</td>
+        <td>02:00-2:50</td>
+        {{ range $schd := .Schedules}}
+        <td>{{ $x := index $schd.Data 6 }}{{ $x.Name }}&nbsp;{{ $x.Code }}<br>{{ $x.Venue }}</td>
+        {{ end }}
+      </tr>
+      <tr>
+        <td>02:55-03:45</td>
+        <td>02:50-03:40</td>
+        {{ range $schd := .Schedules}}
+        <td>{{ $x := index $schd.Data 7 }}{{ $x.Name }}&nbsp;{{ $x.Code }}<br>{{ $x.Venue }}</td>
+        {{ end }}
+      </tr>
+      <tr>
+        <td>03:50-04:40</td>
+        <td>03:50-04:40</td>
+        {{ range $schd := .Schedules}}
+        <td>{{ $x := index $schd.Data 8 }}{{ $x.Name }}&nbsp;{{ $x.Code }}<br>{{ $x.Venue }}</td>
+        {{ end }}
+      </tr>
+      <tr>
+        <td>04:45-5:35</td>
+        <td>04:40-5:30</td>
+        {{ range $schd := .Schedules}}
+        <td>{{ $x := index $schd.Data 9 }}{{ $x.Name }}&nbsp;{{ $x.Code }}<br>{{ $x.Venue }}</td>
+        {{ end }}
+      </tr>
+      <tr>
+        <td>05:40-6:30</td>
+        <td>05:40-6:30</td>
+        {{ range $schd := .Schedules}}
+        <td>{{ $x := index $schd.Data 10 }}{{ $x.Name }}&nbsp;{{ $x.Code }}<br>{{ $x.Venue }}</td>
+        {{ end }}
+      </tr>
+      <tr>
+        <td>06:35-7:25</td>
+        <td>06:30-7:20</td>
+        {{ range $schd := .Schedules}}
+        <td>{{ $x := index $schd.Data 11 }}{{ $x.Name }}&nbsp;{{ $x.Code }}<br>{{ $x.Venue }}</td>
+        {{ end }}
+      </tr>
+    </table>
+
+  </div>
+
+
+</body>
+
+</html>

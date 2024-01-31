@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ .AppName}} - Edit TimeTable</title>
+    <link rel="stylesheet" href="/static/tailwind.css">
+    <link rel="stylesheet" href="/static/nav.css">
+    <link rel="icon" href="/static/logo.png" type="image/x-icon">
+</head>
+
+<body class="h-screen bg-gray-900 editpage">
+    <div class="navi">
+        <nav>
+            <div>
+                <a href="/home">Home</a>
+            </div>
+            <div>
+                <a href="/edit">Edit</a>
+            </div>
+            <div>
+                <a href="/request">Friends</a>
+            </div>
+        </nav>
+    </div>
+    <br>
+    <p style="text-align: center; color: white; font-size: 20px;">Enter Your TimeTable</p>
+    {{ if .ErrMsg }}
+    <div class="text-red-600 font-bold">{{ .ErrMsg }}</div>
+    {{ end }}
+    <div class="w-full rounded-xl shadow-xl border bg-gray-800 border-gray-70">
+        <table class="w-full rounded-lg shadow-xl mt-0 p-0 table-auto">
+            <thead>
+                <tr>
+                    <th
+                        class="sm:text-xl text-center text-base font-bold leading-tight tracking-tight md:text-2xl text-white">
+                        Course Name
+                    </th>
+                    <th class="sm:text-xl text-base font-bold leading-tight tracking-tight md:text-2xl text-white">
+                        Course Code
+                    </th>
+                    <th class="sm:text-xl text-base font-bold leading-tight tracking-tight md:text-2xl text-white">Slot
+                    </th>
+                    <th class="sm:text-xl text-base font-bold leading-tight tracking-tight md:text-2xl text-white">Venue
+                    </th>
+                    <th class="sm:text-xl text-base font-bold leading-tight tracking-tight md:text-2xl text-white">
+                        Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ range $c := .Courses }}
+                <tr>
+                    <form action="/edit" method="post">
+                        <input type="hidden" name="id" value="{{$c.Id}}">
+                        <input type="hidden" name="type" value="theory">
+                        <td>
+                            <input type="text" name="name" value="{{$c.Name}}">
+                        </td>
+                        <td>
+                            <input type="text" name="code" value="{{$c.Code}}">
+                        </td>
+
+                        <td>
+                            <select name="slot" onchange="updateCheckboxes(this)"
+                                class="border sm:text-base text-sm rounded-lg p-2.5 bg-gray-700 border-gray-600 text-white focus:ring-blue-500 focus:border-blue-500 focus:outline-none">
+                                <option value="A1" {{ if eq $c.Slot "A1" }} selected {{ end }}>A1</option>
+                                <option value="A2" {{ if eq $c.Slot "A2" }} selected {{ end }}>A2</option>
+                                <option value="B1" {{ if eq $c.Slot "B1" }} selected {{ end }}>B1</option>
+                                <option value="B2" {{ if eq $c.Slot "B2" }} selected {{ end }}>B2</option>
+                                <option value="C1" {{ if eq $c.Slot "C1" }} selected {{ end }}>C1</option>
+                                <option value="C2" {{ if eq $c.Slot "C2" }} selected {{ end }}>C2</option>
+                                <option value="D1" {{ if eq $c.Slot "D1" }} selected {{ end }}>D1</option>
+                                <option value="D2" {{ if eq $c.Slot "D2" }} selected {{ end }}>D2</option>
+                                <option value="E1" {{ if eq $c.Slot "E1" }} selected {{ end }}>E1</option>
+                                <option value="E2" {{ if eq $c.Slot "E2" }} selected {{ end }}>E2</option>
+                                <option value="F1" {{ if eq $c.Slot "F1" }} selected {{ end }}>F1</option>
+                                <option value="F2" {{ if eq $c.Slot "F2" }} selected {{ end }}>F2</option>
+                                <option value="G1" {{ if eq $c.Slot "G1" }} selected {{ end }}>G1</option>
+                                <option value="G2" {{ if eq $c.Slot "G2" }} selected {{ end }}>G2</option>
+                            </select>
+                            <label for="type1" class="text-white sm:text-base text-sm">A</label><input type="checkbox"
+                                name="type1" {{if $c.X }} checked {{ end }}>
+                            <label for="type2" class="text-white sm:text-base text-sm">TA</label><input type="checkbox"
+                                name="type2" {{if $c.TX }} checked {{ end }}>
+                            <label for="type3" class="text-white sm:text-base text-sm">TAA</label><input type="checkbox"
+                                name="type3" {{if $c.TXX }} checked {{ end }}>
+                        </td>
+                        <td>
+                            <input type="text" name="venue" value="{{$c.Venue}}">
+                        </td>
+                        <td>
+                            <input type="submit" name="action" value="Edit"
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg mr-2 sm:text-base text-sm">
+                            <input type="submit" name="action" value="Delete"
+                                class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg sm:text-base text-sm">
+                        </td>
+                    </form>
+                </tr>
+                {{ end }}
+                <tr>
+                    <form action="/edit" method="post">
+                        <input type="hidden" name="id" value="+">
+                        <input type="hidden" name="type" value="theory">
+                        <td>
+                            <input type="text" name="name" value="">
+                        </td>
+                        <td>
+                            <input type="text" name="code" value="">
+                        </td>
+                        <td>
+                            <select name="slot" onchange="updateCheckboxes(this)"
+                                class="border sm:text-base text-sm rounded-lg p-2.5 bg-gray-700 border-gray-600 text-white focus:ring-blue-500 focus:border-blue-500 focus:outline-none">
+                                <option value="A1" selected>A1</option>
+                                <option value="A2">A2</option>
+                                <option value="B1">B1</option>
+                                <option value="B2">B2</option>
+                                <option value="C1">C1</option>
+                                <option value="C2">C2</option>
+                                <option value="D1">D1</option>
+                                <option value="D2">D2</option>
+                                <option value="E1">E1</option>
+                                <option value="E2">E2</option>
+                                <option value="F1">F1</option>
+                                <option value="F2">F2</option>
+                                <option value="G1">G1</option>
+                                <option value="G2">G2</option>
+                            </select>
+                            <label for="type1" class="text-white">A</label><input type="checkbox" name="type1">
+                            <label for="type2" class="text-white">TA</label><input type="checkbox" name="type2">
+                            <label for="type3" class="text-white">TAA</label><input type="checkbox" name="type3">
+                        </td>
+                        <td>
+                            <input type="text" name="venue" value="">
+                        </td>
+                        <td>
+                            <input type="submit" value="Save"
+                                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg mr-2 sm:text-base text-sm">
+                        </td>
+                    </form>
+                </tr>
+                {{ range $l := .LabCourses }}
+                <tr>
+                    <form action="/edit" method="post">
+                        <input type="hidden" name="id" value="{{ $l.Id }}">
+                        <input type="hidden" name="type" value="lab">
+                        <td>
+                            <input type="text" name="name" value="{{ $l.Name }}">
+                        </td>
+                        <td>
+                            <input type="text" name="code" value="{{ $l.Code }}">
+                        </td>
+                        <td style="text-align: center;">
+                            <select name="slot"
+                                class="border sm:text-base text-sm rounded-lg p-2.5 bg-gray-700 border-gray-600 text-white focus:ring-blue-500 focus:border-blue-500 focus:outline-none">
+                                {{range $lc := $.LabCounts}}
+                                <option value="{{$lc.Id}}" {{if eq $l.Slot $lc.Id}} selected{{end}}>{{$lc.Disp}}
+                                </option>
+                                {{end}}
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="venue" value="{{ $l.Venue }}">
+                        </td>
+                        <td>
+                            <input type="submit" name="action" value="Edit"
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg mr-2">
+                            <input type="submit" name="action" value="Delete"
+                                class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">
+                        </td>
+                    </form>
+                </tr>
+                {{ end }}
+                <tr>
+                    <form action="/edit" method="post">
+                        <input type="hidden" name="id" value="+">
+                        <input type="hidden" name="type" value="lab">
+                        <td>
+                            <input type="text" name="name" value="">
+                        </td>
+                        <td>
+                            <input type="text" name="code" value="">
+                        </td>
+                        <td style="text-align: center;">
+                            <select name="slot"
+                                class="border sm:text-base text-sm rounded-lg p-2.5 bg-gray-700 border-gray-600 text-white focus:ring-blue-500 focus:border-blue-500 focus:outline-none">
+                                {{range $lc := .LabCounts}}
+                                <option value="{{$lc.Id}}">{{$lc.Disp}}</option>
+                                {{end}}
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="venue" value="">
+                        </td>
+                        <td>
+                            <input type="submit" name="save" value="save"
+                                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg mr-2">
+                        </td>
+                    </form>
+                </tr>
+        </table>
+    </div>
+    <script src="/static/edit.js" typ></script>
+</body>
+
+</html>

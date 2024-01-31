@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+td,
+th {
+    @apply text-center p-2
+}
+
+.editpage input[type=text] {
+    @apply border sm:text-base text-sm rounded-lg block w-full p-2.5 sm:p-1 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500 focus:outline-none
+}

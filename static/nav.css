@@ -1,0 +1,20 @@
+nav {
+    text-align: center;
+}
+
+nav div {
+    display: inline-block;
+    border: 1px solid #fff;
+    padding: 5px 5px;
+    border-radius: 5px;
+    margin: 2px;
+}
+
+nav div:hover {
+    background-color: #374151;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+}

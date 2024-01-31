@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ .AppName}} - Edit TimeTable</title>
+    <link rel="stylesheet" href="../static/tailwind.css">
+    <link rel="stylesheet" href="/static/nav.css">
+    <link rel="icon" href="/static/logo.png" type="image/x-icon">
+</head>
+
+<body class="h-screen bg-gray-900 text-white p-8">
+    <div class="navi">
+        <nav>
+          <div>
+            <a href="/home">Home</a>
+          </div>
+          <div>
+            <a href="/edit">Edit</a>
+          </div>
+          <div>
+            <a href="/request">Friends</a>
+          </div>
+        </nav>
+      </div>
+      <br>
+    <form action="/request" method="post" class="mb-8 flex justify-center">
+        <div>
+            <input type="text" id="user" name="user" value="" placeholder="Search"
+                class="border px-4 py-2 rounded-md bg-gray-800 focus:outline-none focus:border-blue-500">
+            <input type="submit" name="action" value="Request" class="bg-blue-600 text-white px-4 py-2 ml-4 rounded-md">
+        </div>
+    </form>
+    {{ if .Friends}}
+    <div class="flex flex-wrap">
+        <div class=" p-4 flex-1 rounded-xl shadow-xl mt-0 xl:p-0 border bg-gray-800 border-gray-70">
+            <table>
+                <tr>
+                    <th class="py-2 px-4">
+                        Friends
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                {{ range $c := .Friends }}
+                <tr>
+                    <td>
+                        {{$c}}
+                    </td>
+                    <td>
+                        <form action="/request" method="post">
+                            <input type="hidden" name="user" value="{{$c}}">
+                            <input type="submit" name="action"
+                                class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg" value="Remove">
+                        </form>
+                    </td>
+                </tr>
+                {{ end }}
+            </table>
+        </div>
+        {{end}}
+        {{if .Pending}}
+        <div class="flex-1">
+            <table>
+                <tr>
+                    <th class="py-2 px-4 bg-gray-800">
+                        Pending
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                {{ range $c := .Pending }}
+                <tr>
+                    <td>
+                        {{$c}}
+                    </td>
+                    <td>
+                        <form action="/request" method="post">
+                            <input type="hidden" name="user" value="{{$c}}">
+                            <input type="submit" name="action"
+                                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg mr-2"
+                                value="Accept">
+                            <input type="submit" name="action"
+                                clas="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg" value="Reject">
+                        </form>
+                    </td>
+                </tr>
+                {{ end }}
+            </table>
+        </div>
+        {{ end }}
+    </div>
+</body>
+
+</html>
