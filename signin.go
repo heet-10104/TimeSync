@@ -34,7 +34,7 @@ func signin(w http.ResponseWriter, r *http.Request) {
 		if err := row.Scan(&psw); err == nil {
 			if CheckPasswordHash(password, psw) {
 				session.Put(r.Context(), "user", username)
-				http.Redirect(w, r, "/edit", http.StatusSeeOther)
+				http.Redirect(w, r, "/home", http.StatusSeeOther)
 				return
 			}
 		}
