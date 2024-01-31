@@ -1,16 +1,14 @@
 # TimeSync
 
 
-## Installation
-First install [Go](http://golang.org).
+## Usage
+To run the project first install [Go](http://golang.org) and clone this repository on your computer.
 
-Then run:
 ```bash
-go install github.com/azryx/timesync@latest
+git clone git@github.com:azryx/timesync
+cd timesync
 ```
-
-## Usage 
-Run the server using:
+and then run
 ```bash
-timesync --port <port>
+go run .
 ```
