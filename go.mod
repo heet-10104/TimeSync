@@ -1,4 +1,4 @@
-module projectx
+module github.com/azryx/timesync
 
 go 1.21.6
 
