@@ -9,7 +9,7 @@ We have made this application to help keep track of all your friends time tables
 To run the project first install [Go](http://golang.org) and clone this repository on your computer.
 
 ```bash
-git clone git@github.com:azryx/timesync
+git clone git@github.com:Heet-10104/timesync
 cd timesync
 ```
 and then run
